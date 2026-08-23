@@ -1,0 +1,74 @@
+generated: '2026-08-23'
+method: probed
+source: https://kanarys.com/
+note: >-
+  Every /.well-known/* path on kanarys.com answers HTTP 200 with the SAME 114-byte
+  HTML redirect stub that the site root and a randomly generated control path return.
+  kanarys.com is a parked domain (GoDaddy parking lander: nameservers ns55/ns56
+  .domaincontrol.com, body redirects to /lander, which loads
+  img1.wsimg.com/parking-lander/ and pushes {ap:"parking"}). There is no served
+  .well-known surface here. hit_count is 0 and NO WellKnown or SecurityTxt pointer is
+  emitted, because promoting a catch-all 200 into a document would credit Kanarys with
+  a discovery surface it does not serve.
+hit_count: 0
+hosts:
+- host: https://kanarys.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — not a security.txt
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — not OIDC discovery
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — not RFC 8414 metadata
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — not RFC 9727 api-catalog
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — not a plugin manifest
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — REJECTED as an A2A agent card
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: catch-all HTML stub (114 bytes, text/html) — REJECTED as a legacy A2A card
+soft_404_control:
+  path: /this-is-a-control-path-a7f3d9
+  status: 200
+  bytes: 114
+  content_type: text/html
+  identical_to_root: true
+  conclusion: >-
+    The host answers 200 for arbitrary paths with a byte-identical body, so a 200 on
+    this host carries no information about whether a document exists.
+false_credit_traps:
+- path: /llms.txt
+  status: 200
+  content_type: text/plain
+  bytes: 65
+  body: "User-agent: *\nDisallow-Training: /\nAllow: /\nSitemap: /sitemap.xml\n"
+  verdict: not-an-llms-txt
+  note: >-
+    Returns 200 with real text/plain content, so a naive probe would credit Kanarys with
+    an llms.txt. It is not one — the body is robots.txt syntax emitted by the GoDaddy
+    parking service, not an llms.txt-format document, and it describes the parking
+    lander rather than any Kanarys product. NO LLMsTxt pointer is emitted.
+- path: /robots.txt
+  status: 200
+  content_type: text/plain
+  bytes: 66
+  body: "User-agent: *\nAllow: /\nLLM-Policy: /llms.txt\nSitemap: /sitemap.xml\n"
+  verdict: parking-service-boilerplate
+  note: >-
+    Sitemap resolves to https://kanarys.com/sitemap.xml, whose only <loc> is
+    https://kanarys.com/lander — one URL, the parking page.

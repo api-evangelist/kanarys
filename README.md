@@ -64,5 +64,20 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Kanarys is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Kanarys, Inc. was a Dallas, Texas workforce-analytics company (founded 2018) whose SaaS
+platform gave enterprise HR and diversity leaders survey, benchmarking and workplace-inclusion
+analytics. Integrations with customer HRIS, ATS and payroll systems were delivered as managed,
+per-customer connectors rather than a self-serve public API, and the company never published a
+developer portal, an OpenAPI, or any other machine-readable contract.
+
+Kanarys sold its intellectual property and name to a special-purpose vehicle formed by a group
+of former chief diversity officers in mid-2024. The domain has since been abandoned:
+`kanarys.com` served the real site as recently as **22 April 2026** and by **17 May 2026** was a
+GoDaddy parking lander, which now answers HTTP 200 with the same 114-byte redirect stub for
+every path — including `/openapi.json`, `/.well-known/agent-card.json` and a randomly generated
+control path. `api.`, `docs.` and `developer.kanarys.com` do not resolve. Full contract
+discovery was still run; see `well-known/kanarys-well-known.yml` for the probe record and the
+false-credit traps on this host.
+
+- Company site (parked, GoDaddy lander): https://kanarys.com/
+- LinkedIn (live): https://www.linkedin.com/company/kanarysinc

@@ -1,17 +1,39 @@
 aid: kanarys
 name: Kanarys
-description: 'Kanarys is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Kanarys, Inc. was a Dallas, Texas workforce-analytics company founded in 2018 by
+  Mandy Price, Star Carter and Bennie King. Its SaaS platform combined employee
+  experience surveys, demographic and cultural data, anonymous employee reviews and
+  peer benchmarking to give enterprise HR and diversity leaders analytics on workplace
+  inclusion. Integration with customer HRIS, ATS and payroll systems was delivered as
+  managed, per-customer connectors run by Kanarys staff rather than as a self-serve
+  public API, and the company never published a developer portal, an OpenAPI or any
+  other machine-readable contract. Kanarys raised a $5M Series A, counted 7-Eleven and
+  Yum! Brands among its customers, and in mid-2024 sold its intellectual property and
+  name to a special-purpose vehicle formed by a group of former chief diversity
+  officers; co-founder Mandy Price left for the Draper Richards Kaplan Foundation in
+  February 2025. The company now operates no public web surface: kanarys.com served
+  the real site as recently as 22 April 2026 and is a GoDaddy parking lander as of
+  17 May 2026, and no successor domain resolves.
 url: https://raw.githubusercontent.com/api-evangelist/kanarys/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
 x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-23'
 modified: '2026-08-23'
 tags:
 - Company
+- Human Resources
+- HR Technology
+- Workforce Analytics
+- Employee Experience
+- Diversity Equity and Inclusion
+- Survey
+- Benchmarking
+- Analytics
+- Enterprise Software
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +41,52 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
-- type: Website
-  url: https://www.nasdaqprivatemarket.com/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/kanarysinc
+  description: >-
+    The company's LinkedIn page (title "Kanarys™") is the only surface still returning
+    a real body; verified live 2026-08-23 (HTTP 200).
+
+x-enrichment:
+  date: '2026-08-23'
+  status: minimal
+  artifacts_added: 1
+  pass: local-v1
+
+x-coverage:
+  state: none
+  reason: defunct
+  detail: >-
+    Kanarys sold its IP and name to a chief-diversity-officer special-purpose vehicle
+    in mid-2024 and its domain has since been abandoned — kanarys.com served the real
+    site through 22 April 2026 and by 17 May 2026 became a GoDaddy parking lander that
+    answers HTTP 200 with the same 114-byte redirect stub for every path, including a
+    randomly generated control path, /openapi.json and /.well-known/agent-card.json.
+  evidence:
+  - url: https://kanarys.com/
+    status: 200
+  - url: https://kanarys.com/this-is-a-control-path-a7f3d9
+    status: 200
+  - url: https://kanarys.com/openapi.json
+    status: 200
+  - url: https://kanarys.com/.well-known/agent-card.json
+    status: 200
+  - url: https://kanarys.com/.well-known/security.txt
+    status: 200
+  - url: https://kanarys.com/sitemap.xml
+    status: 200
+  - url: https://api.kanarys.com/
+    status: 0
+  - url: https://docs.kanarys.com/
+    status: 0
+  - url: https://developer.kanarys.com/
+    status: 0
+  - url: https://api.github.com/orgs/Kanarysinc
+    status: 200
+  - url: https://pypi.org/pypi/kanarys/json
+    status: 404
+  - url: https://registry.npmjs.org/kanarys
+    status: 404
+  - url: https://www.linkedin.com/company/kanarysinc
+    status: 200
+  checked: '2026-08-23'
